@@ -1,4 +1,16 @@
+const { program } = require("commander");
 const contacts = require("./contacts");
+
+program
+  .option("-a, --action <type>")
+  .option("-i, --id <type>")
+  .option("-n, --name <type>")
+  .option("-e, --email <type>")
+  .option("-p, --phone <type>");
+
+program.parse();
+const options = program.opts();
+invokeAction(options);
 
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
@@ -26,10 +38,3 @@ async function invokeAction({ action, id, name, email, phone }) {
       console.warn("\x1B[31m Unknown action type!");
   }
 }
-
-// invokeAction({
-//   action: "add",
-//   name: "Alice Green",
-//   email: "alise.green@mail.com",
-//   phone: "355-22-55",
-// });

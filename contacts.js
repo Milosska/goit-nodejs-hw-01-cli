@@ -23,8 +23,8 @@ async function removeContact(contactId) {
   if (index === -1) {
     return "Sorry, there is no contact with such ID";
   }
-  const removedContact = contactsList.splice(index, 1);
-  await fs.writeFile(contactsPath, JSON.stringify(contactsList, null, 2));
+  const [removedContact] = contactsList.splice(index, 1);
+  await fs.writeFile(contactsPath, JSON.stringify([...contactsList], null, 2));
   return removedContact;
 }
 
